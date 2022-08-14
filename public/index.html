@@ -1,43 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="<%=require('./images/header/header-logo.svg')%>" alt="Логотип Mesto Russia.">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__item">
+        <div class="profile__avatar">
+          <button class="profile__avatar-edit-button" type="button"></button>
+        </div>
+        <div class="profile__description">
+          <div class="profile__heading">
+            <h1 class="profile__name"> </h1>
+            <button class="profile__edit-button" type="button"></button>
+          </div>
+          <p class="profile__about"> </p>
+        </div>
+      </div>
+      <button class="profile__photo-add-button" type="button"></button>
+    </section>
+    <section class="photo"> </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__text">&#169; 2021 Mesto Russia</p>
+  </footer>
+  <section class="popup popup_type_profile">
+    <div class="popup__container">
+      <button class="popup__close-button" name="close-profile" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="profile" novalidate>
+        <input
+        class="popup__input popup__input_type_name"
+        id="name"
+        name="name"
+        type="text"
+        value="Жак-Ив Кусто"
+        required
+        minlength="2"
+        maxlength="40"
+        >
+        <span class="popup__error" id="name-error"></span>
+        <input
+        class="popup__input popup__input_type_about"
+        id="about"
+        name="about"
+        type="text"
+        value="Исследователь океана"
+        required
+        minlength="2"
+        maxlength="200"
+        >
+        <span class="popup__error" id="about-error"></span>
+        <button class="popup__save-button" name="save-profile" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_photo">
+    <div class="popup__container">
+      <button class="popup__close-button" name="close-photo" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="photo" novalidate>
+        <input
+        class="popup__input popup__input_type_title"
+        id="title"
+        name="name"
+        type="text"
+        placeholder="Название"
+        required
+        minlength="2"
+        maxlength="30"
+        >
+        <span class="popup__error" id="title-error"></span>
+        <input
+        class="popup__input popup__input_type_link"
+        id="url"
+        name="link"
+        type="url"
+        placeholder="Ссылка на картинку"
+        required
+        minlength="8"
+        >
+        <span class="popup__error" id="url-error"></span>
+        <button class="popup__save-button popup__save-button_disabled" name="save-photo" type="submit" disabled>Создать</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_view">
+    <div class="popup__container-view">
+      <button class="popup__close-button" name="close-view" type="button"></button>
+      <form class="popup__form-view" name="view">
+        <img class="popup__view-photo" src=" " alt=" ">
+        <p class="popup__view-title"> </p>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_delete">
+    <div class="popup__container">
+      <button class="popup__close-button" name="close-delete" type="button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup__form" name="delete"  method="post" novalidate>
+        <button class="popup__save-button" name="delete-photo" type="submit">Да</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_avatar">
+    <div class="popup__container">
+      <button class="popup__close-button" name="close-avatar" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="avatar" novalidate>
+        <input
+        class="popup__input popup__input_type_link"
+        id="avatar"
+        name="link"
+        type="url"
+        placeholder="Ссылка на фото"
+        required
+        minlength="8"
+        >
+        <span class="popup__error" id="avatar-error"></span>
+        <button class="popup__save-button popup__save-button_disabled" name="save-avatar" type="submit" disabled>Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <template id="template" class="template">
+    <div class="card">
+      <button class="card__delete-button" type="button"></button>
+      <img class="card__image" src=" " alt=" ">
+      <div class="card__caption">
+        <h2 class="card__title"> </h2>
+        <div class="card__like">
+          <button class="card__like-button" type="button"></button>
+          <span class="card__like-number"></span>
+        </div>
+      </div>
+    </div>
+  </template>
+</body>
 </html>
