@@ -25,9 +25,16 @@ const props = [
 ]
 */
 function App() {
+  const [isEditAvatarPopupOpen, setEditAvatarPopup] = useState([false]);
   const [isEditProfilePopupOpen, setIsEditProfilePopup] = useState([false]);
   const [isAddPlacePopupOpen, setIsAddPlacePopup] = useState([false]);
-  const [isEditAvatarPopupOpen, setEditAvatarPopup] = useState([false]);
+  
+  function handleEditAvatarClick() {
+    setEditAvatarPopup(true);
+    /*const popupAvatar = document.querySelector('.popup_type_avatar');
+    console.log(popupAvatar)
+    // popupAvatar.classList.add('popup_opened');*/
+  }
 
   function handleEditProfileClick() {
     setIsEditProfilePopup(true);
@@ -40,20 +47,15 @@ function App() {
     /*const popupPhoto = document.querySelector('.popup_type_photo'); 
     popupPhoto.classList.add('popup_opened');*/
   }
-
-  function handleEditAvatarClick() {
-    setEditAvatarPopup(true);
-    /*const popupAvatar = document.querySelector('.popup_type_avatar');
-    console.log(popupAvatar)
-    // popupAvatar.classList.add('popup_opened');*/
-  }
-  
+ 
   return (
     <div className="App">
       <Header />
       <Main handleEditAvatarClick={handleEditAvatarClick} handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} />
       <Footer />
-      <PopupWithForm name={['profile', 'photo', 'delete', 'avatar']} isEditProfilePopupOpen={isEditProfilePopupOpen} isAddPlacePopupOpen={isAddPlacePopupOpen} isEditAvatarPopupOpen={isEditAvatarPopupOpen} />
+      <PopupWithForm name={'avatar'} title={'Обновить аватар'} isOpen={isEditAvatarPopupOpen} />
+      <PopupWithForm name={'profile'} title={'Редактировать профиль'} isOpen={isEditProfilePopupOpen} />
+      <PopupWithForm name={'photo'} title={'Новое место'} isOpen={isAddPlacePopupOpen} />
       <ImagePopup />
     </div>
   );
