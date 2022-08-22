@@ -25,27 +25,26 @@ const props = [
 ]
 */
 function App() {
-  const [isEditAvatarPopupOpen, setEditAvatarPopup] = useState([false]);
-  const [isEditProfilePopupOpen, setIsEditProfilePopup] = useState([false]);
-  const [isAddPlacePopupOpen, setIsAddPlacePopup] = useState([false]);
+  const [isEditAvatarPopupOpen, setEditAvatarPopup] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopup] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopup] = useState(false);
   
   function handleEditAvatarClick() {
     setEditAvatarPopup(true);
-    /*const popupAvatar = document.querySelector('.popup_type_avatar');
-    console.log(popupAvatar)
-    // popupAvatar.classList.add('popup_opened');*/
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopup(true);
-    /*const popupProfile = document.querySelector('.popup_type_profile'); 
-    popupProfile.classList.add('popup_opened');*/
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopup(true);
-    /*const popupPhoto = document.querySelector('.popup_type_photo'); 
-    popupPhoto.classList.add('popup_opened');*/
+  }
+
+  function closeAllPopups() {
+    setEditAvatarPopup(false);
+    setIsEditProfilePopup(false);
+    setIsAddPlacePopup(false);
   }
  
   return (
@@ -53,9 +52,9 @@ function App() {
       <Header />
       <Main handleEditAvatarClick={handleEditAvatarClick} handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} />
       <Footer />
-      <PopupWithForm name={'avatar'} title={'Обновить аватар'} isOpen={isEditAvatarPopupOpen} />
-      <PopupWithForm name={'profile'} title={'Редактировать профиль'} isOpen={isEditProfilePopupOpen} />
-      <PopupWithForm name={'photo'} title={'Новое место'} isOpen={isAddPlacePopupOpen} />
+      <PopupWithForm name={'avatar'} title={'Обновить аватар'} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+      <PopupWithForm name={'profile'} title={'Редактировать профиль'} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+      <PopupWithForm name={'photo'} title={'Новое место'} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
       <ImagePopup />
     </div>
   );

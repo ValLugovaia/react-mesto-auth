@@ -1,10 +1,10 @@
 function Main(props) {
 
+  const onEditAvatar = () => props.handleEditAvatarClick();
+
   const onEditProfile = () => props.handleEditProfileClick();
 
   const onAddPlace = () => props.handleAddPlaceClick();
-
-  const onEditAvatar = () => props.handleEditAvatarClick();
 
     return (
         <main className="content">
