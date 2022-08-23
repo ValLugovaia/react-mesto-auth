@@ -6,6 +6,7 @@ function Main(props) {
   const onEditAvatar = () => props.handleEditAvatarClick();
   const onEditProfile = () => props.handleEditProfileClick();
   const onAddPlace = () => props.handleAddPlaceClick();
+  const onCardClick = (card) => props.handleCardClick(card);
 
   const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
@@ -54,7 +55,7 @@ function Main(props) {
           <button className="profile__photo-add-button" type="button" onClick={onAddPlace}></button>
         </section>
         <section className="photo">{cards.map((card) => (
-          <Card key={card._id} card={card}></Card>
+          <Card key={card._id} card={card} onCardClick={onCardClick}></Card>
         ))}</section>
       </main>
   );
