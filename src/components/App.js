@@ -39,8 +39,8 @@ function App() {
       <Header />
       <Main handleEditAvatarClick={handleEditAvatarClick} handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} handleCardClick={handleCardClick} />
       <Footer />
-      <PopupWithForm name={'avatar'} title={'Обновить аватар'} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-        {<input
+      <PopupWithForm name={'avatar'} title='Обновить аватар' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonText='Сохранить'>
+        <input
           className="popup__input popup__input_type_link"
           id="avatar"
           name="link"
@@ -48,11 +48,11 @@ function App() {
           placeholder="Ссылка на фото"
           required
           minLength="8"
-        />}
-        {<span className="popup__error" id="about-error"></span>}
+        />
+        <span className="popup__error" id="about-error"></span>
       </PopupWithForm>
-      <PopupWithForm name={'profile'} title={'Редактировать профиль'} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-        {<input
+      <PopupWithForm name={'profile'} title='Редактировать профиль' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} buttonText='Сохранить'>
+        <input
           className="popup__input popup__input_type_name"
           id="name"
           name="name"
@@ -61,9 +61,9 @@ function App() {
           required
           minLength="2"
           maxLength="40"
-        />}
-        {<span className="popup__error" id="name-error"></span>}
-        {<input
+        />
+        <span className="popup__error" id="name-error"></span>
+        <input
           className="popup__input popup__input_type_about"
           id="about"
           name="about"
@@ -72,11 +72,11 @@ function App() {
           required
           minLength="2"
           maxLength="200"
-        />}
-        {<span className="popup__error" id="about-error"></span>}
+        />
+        <span className="popup__error" id="about-error"></span>
       </PopupWithForm>
-      <PopupWithForm name={'photo'} title={'Новое место'} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-        {<input
+      <PopupWithForm name={'photo'} title='Новое место' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} buttonText='Сохранить'>
+        <input
           className="popup__input popup__input_type_title"
           id="title"
           name="name"
@@ -85,9 +85,9 @@ function App() {
           required
           minLength="2"
           maxLength="30"
-        />}
-        {<span className="popup__error" id="title-error"></span>}
-        {<input
+        />
+        <span className="popup__error" id="title-error"></span>
+        <input
           className="popup__input popup__input_type_link"
           id="url"
           name="link"
@@ -95,8 +95,8 @@ function App() {
           placeholder="Ссылка на картинку"
           required
           minLength="8"
-        />}
-        {<span className="popup__error" id="url-error"></span>}
+        />
+        <span className="popup__error" id="url-error"></span>
       </PopupWithForm>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>

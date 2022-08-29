@@ -3,15 +3,15 @@ import api from '../utils/Api.js';
 import Card from './Card.js';
 
 function Main(props) {
-  const onEditAvatar = () => props.handleEditAvatarClick();
-  const onEditProfile = () => props.handleEditProfileClick();
-  const onAddPlace = () => props.handleAddPlaceClick();
-  const onCardClick = (card) => props.handleCardClick(card);
-
   const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setInitialCards] = useState([]);
+
+  const onEditAvatar = () => props.handleEditAvatarClick();
+  const onEditProfile = () => props.handleEditProfileClick();
+  const onAddPlace = () => props.handleAddPlaceClick();
+  const onCardClick = (card) => props.handleCardClick(card);
 
   function getUserInfo() {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
