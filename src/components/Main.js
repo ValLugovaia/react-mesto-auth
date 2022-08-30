@@ -41,8 +41,8 @@ function Main(props) {
         <main className="content">
         <section className="profile">
           <div className="profile__item">
-            <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }} >
-              <button className="profile__avatar-edit-button" type="button" onClick={onEditAvatar}></button>
+            <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }} onClick={onEditAvatar}>
+              <button className="profile__avatar-edit-button" type="button"></button>
             </div>
             <div className="profile__description">
               <div className="profile__heading">
