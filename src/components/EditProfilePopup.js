@@ -24,7 +24,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     function handleSubmit(e) {
         e.preventDefault();
         onUpdateUser({ name, about });
-    }
+    };
 
     return (
         <PopupWithForm name={'profile'} title='Редактировать профиль' isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} buttonText='Сохранить'>
@@ -33,7 +33,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             id="name"
             name="name"
             type="text"
-            value="Жак-Ив Кусто"
+            defaultValue={name}
             required
             minLength="2"
             maxLength="40"
@@ -45,7 +45,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             id="about"
             name="about"
             type="text"
-            value="Исследователь океана"
+            defaultValue={about}
             required
             minLength="2"
             maxLength="200"

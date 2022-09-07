@@ -32,6 +32,7 @@ function App() {
             link: card.link,
             likes: card.likes,
             _id: card._id,
+            owner: card.owner,
           }))
         );
       })
@@ -53,13 +54,13 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then((deleteCard) => {
+    api.deleteCard(card._id).then(() => {
         setCards((state) => state.filter((deleteCard) => deleteCard._id !== card._id));
       });
   }
 
   function handleUpdateUser({ name, about }) {
-    api.changeUserInfom({ name, about }).then((data) => {
+    api.changeUserInfo({ name, about }).then((data) => {
         setCurrentUser(data);
         closeAllPopups();
       })
@@ -73,7 +74,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(data) {
-    api.addCardApi(data).then((data) => {
+    api.addCard(data).then((data) => {
         setCards([data, ...cards]);
         closeAllPopups();
       })
@@ -106,11 +107,11 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header />
-        <Main handleEditAvatarClick={handleEditAvatarClick} handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} handleCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} cards={cards} />
+        <Main cards={cards} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}  />
         <Footer />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdatePlace={handleAddPlaceSubmit} />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

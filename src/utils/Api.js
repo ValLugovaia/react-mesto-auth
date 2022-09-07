@@ -15,7 +15,7 @@ class Api {
     .then(this._handleResponse)
   }
 
-  changeUserInfo(name, about) {
+  changeUserInfo({name, about}) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -76,6 +76,14 @@ class Api {
         headers: this._headers,
     })
     .then(this._handleResponse)
+  }
+
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+        method: isLiked ? "PUT" : "DELETE",
+        headers: this._headers,
+    })
+      .then(this._handleResponse)
   }
 }
 
