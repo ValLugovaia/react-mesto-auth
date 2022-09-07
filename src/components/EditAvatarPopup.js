@@ -5,15 +5,15 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     const avatarRef = useRef();
 
     useEffect(() => {
-        avatarRef.current.value = '';
+        avatarRef.current.value = "";
     }, [isOpen]);
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    function handleSubmit(event) {
+        event.preventDefault();
 
         onUpdateAvatar({
         avatar: avatarRef.current.value,
-        });
+      });
     }
 
     return (
@@ -21,7 +21,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           <input
             className="popup__input popup__input_type_link"
             id="avatar"
-            name="link"
+            name="avatar"
             type="url"
             placeholder="Ссылка на фото"
             required

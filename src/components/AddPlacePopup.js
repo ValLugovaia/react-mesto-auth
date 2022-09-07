@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm.js';
 
-function AddPlacePopup({ isOpen, onClose, onAddCard }) {
+function AddPlacePopup({ isOpen, onClose, onUpdatePlace }) {
     const [link, setLink] = useState('');
     const [name, setName] = useState('');
 
@@ -20,7 +20,7 @@ function AddPlacePopup({ isOpen, onClose, onAddCard }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onAddCard({ name, link });
+        onUpdatePlace({ name, link });
     }
 
     return (

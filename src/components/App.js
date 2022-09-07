@@ -66,8 +66,8 @@ function App() {
       })
   }
 
-  function handleUpdateAvatar({ avatar }) {
-    api.editAvatar({ avatar }).then((data) => {
+  function handleUpdateAvatar(avatar) {
+    api.editAvatar(avatar).then((data) => {
         setCurrentUser(data);
         closeAllPopups();
       })
@@ -82,7 +82,7 @@ function App() {
 
   function handleEditAvatarClick() {
     setEditAvatarPopup(true);
-  }
+  };
 
   function handleEditProfileClick() {
     setIsEditProfilePopup(true);

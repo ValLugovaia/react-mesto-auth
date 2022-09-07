@@ -27,13 +27,11 @@ class Api {
     .then(this._handleResponse)
   }
 
-  editAvatar(data) {
+  editAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({
-        avatar: data.link
-      })
+      body: JSON.stringify(avatar)
     })
     .then(this._handleResponse)
   }
@@ -56,22 +54,6 @@ class Api {
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
-        method: "DELETE",
-        headers: this._headers,
-    })
-    .then(this._handleResponse)
-  }
-
-  addLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-        method: "PUT",
-        headers: this._headers,
-    })
-    .then(this._handleResponse)
-  }
-
-  deleteLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: "DELETE",
         headers: this._headers,
     })
