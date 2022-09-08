@@ -50,12 +50,18 @@ function App() {
     
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch(err => {
+      console.log(err)
     });
-  }
+}
 
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
         setCards((state) => state.filter((deleteCard) => deleteCard._id !== card._id));
+      })
+      .catch(err => {
+        console.log(err)
       });
   }
 
@@ -64,6 +70,9 @@ function App() {
         setCurrentUser(data);
         closeAllPopups();
       })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   function handleUpdateAvatar(avatar) {
@@ -71,6 +80,9 @@ function App() {
         setCurrentUser(data);
         closeAllPopups();
       })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   function handleAddPlaceSubmit(data) {
@@ -78,6 +90,9 @@ function App() {
         setCards([data, ...cards]);
         closeAllPopups();
       })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   function handleEditAvatarClick() {

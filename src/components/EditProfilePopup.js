@@ -33,7 +33,7 @@ function EditProfilePopup(props) {
             id="name"
             name="name"
             type="text"
-            defaultValue={name}
+            value={name}
             required
             minLength="2"
             maxLength="40"
@@ -45,7 +45,7 @@ function EditProfilePopup(props) {
             id="about"
             name="about"
             type="text"
-            defaultValue={about}
+            value={about}
             required
             minLength="2"
             maxLength="200"
