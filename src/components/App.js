@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Redirect, Route, Switch } from "react-router-dom";
 import api from '../utils/Api.js';
 import Header from './Header.js';
 import Main from './Main.js';
@@ -122,6 +123,15 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header />
+        <Switch>
+        <Route path="/sign-up">
+            <Register onRegister={onRegister} />
+          </Route>
+          <Route path="/sign-in">
+            <Login onLogin={onLogin} />
+          </Route>
+          <Route path="/">{loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}</Route>
+        </Switch>
         <Main cards={cards} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}  />
         <Footer />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
