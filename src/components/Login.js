@@ -1,7 +1,26 @@
-function Login() {
+function Login({ onLogin, isValid, errorMessage }) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const formRef = useRef();
+    const submitButton = useCheckButton(formRef.current, isValid);
+
+    function handleEmail(evt) {
+        setEmail(evt.target.value);
+    }
+
+    function handlePassword(evt) {
+        setPassword(evt.target.value);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        onLogin(password, email);
+    }
+
+
     return (
         <section className="auth">
-            <h1 clasName="auth__title">Регистрация</h1>
+            <h1 clasName="auth__title">Вход</h1>
             <form className="auth__form">
                 <label className="auth__field">
                     <input
@@ -12,7 +31,7 @@ function Login() {
                         value={email || ""}
                         placeholder="Email"
                         required
-                        onChange={}
+                        // onChange={}
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
@@ -25,18 +44,11 @@ function Login() {
                         value={password || ""}
                         placeholder="Пароль"
                         required
-                        onChange={}
+                        // onChange={}
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
                 <button className="auth__submit-button" type="submit"></button>
-                <Switch>
-                    <Route>
-                        <Link to="/sign-in" className="auth__signin-link">
-                            <p className="auth__signin">Уже зарегистрированы? Войти</p>
-                        </Link>
-                    </Route>
-                    </Switch>
             </form>
         </section>
     )

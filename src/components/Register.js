@@ -12,7 +12,7 @@ function Register() {
                         value={email || ""}
                         placeholder="Email"
                         required
-                        onChange={}
+                        // onChange={}
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
@@ -25,7 +25,7 @@ function Register() {
                         value={password || ""}
                         placeholder="Пароль"
                         required
-                        onChange={}
+                        // onChange={}
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
@@ -36,7 +36,7 @@ function Register() {
                             <p className="auth__signin">Уже зарегистрированы? Войти</p>
                         </Link>
                     </Route>
-                    </Switch>
+                </Switch>
             </form>
         </section>
     )
