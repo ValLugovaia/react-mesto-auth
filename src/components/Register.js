@@ -50,7 +50,7 @@ function Register({ onLogin }) {
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
-                <button className="auth__submit-button" type="submit"></button>
+                <button className="auth__submit-button" type="submit">Зарегистрироваться</button>
                 <Switch>
                     <Route>
                         <Link to="/sign-in" className="auth__signin-link">

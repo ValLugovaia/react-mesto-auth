@@ -49,7 +49,7 @@ function Login({ onLogin }) {
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
-                <button className="auth__submit-button" type="submit"></button>
+                <button className="auth__submit-button" type="submit">Войти</button>
             </form>
         </section>
     )
