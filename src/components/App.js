@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import api from '../utils/Api.js';
 import { register, authorize } from '../utils/Auth.js';
@@ -26,7 +26,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [userData, setUserData] = useState({ _id: '', email: '' });
-  const history = useNavigate();
+  const history = useHistory();
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -197,7 +197,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header userEmail={userData.email} signOut={signOut} />
-        <Routes>
+        <Switch>
           <ProtectedRoute exact path="/" component={Main} loggedIn={loggedIn} cards={cards} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
           <Route path="/sign-up">
             <Register onRegister={handleRegister} />
@@ -205,8 +205,8 @@ function App() {
           <Route path="/sign-in">
             <Login onLogin={handleLogin} />
           </Route>
-          <Route path="/">{loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />}</Route>
-        </Routes>
+          <Route path="/">{loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}</Route>
+        </Switch>
         <Footer />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />

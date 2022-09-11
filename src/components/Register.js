@@ -1,8 +1,29 @@
-function Register() {
+import { Route, Switch, Link } from 'react-router-dom';
+import { useState } from 'react';
+
+function Register({ onLogin }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    // const formRef = useRef();
+    // const submitButton = useCheckButton(formRef.current, isValid);
+
+    function handleEmail(event) {
+        setEmail(event.target.value);
+    }
+
+    function handlePassword(event) {
+        setPassword(event.target.value);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        onLogin(password, email);
+    }
+
     return (
         <section className="auth">
-            <h1 clasName="auth__title">Регистрация</h1>
-            <form className="auth__form">
+            <h1 className="auth__title">Регистрация</h1>
+            <form className="auth__form" onSubmit={handleSubmit}>
                 <label className="auth__field">
                     <input
                         className="auth__input auth__input_type_email"
@@ -12,7 +33,7 @@ function Register() {
                         value={email || ""}
                         placeholder="Email"
                         required
-                        // onChange={}
+                        onChange={handleEmail}
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
@@ -25,7 +46,7 @@ function Register() {
                         value={password || ""}
                         placeholder="Пароль"
                         required
-                        // onChange={}
+                        onChange={handlePassword}
                     />
                     <span className="auth__error" id="email-error"></span>
                 </label>
