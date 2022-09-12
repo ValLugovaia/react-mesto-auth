@@ -30,40 +30,24 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
 
-  const signOut = () => {
-    localStorage.removeItem("jwt");
-    setLoggedIn(false);
-    history.push("/sign-in");
-  };
-  
-  function getUserInfo() {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([data, cards]) => {
-        setCurrentUser({ ...currentUser,
-          name: data.name,
-          about: data.about,
-          avatar: data.avatar,
-          _id: data._id });
-        setCards(
-          cards.map((card) => ({
-            name: card.name,
-            link: card.link,
-            likes: card.likes,
-            _id: card._id,
-            owner: card.owner,
-          }))
-        );
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
-
   useEffect(() => {
-    if (loggedIn) {
-      getUserInfo();
+    if (loggedIn) {  
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([data, cards]) => {
+          setCurrentUser(data);
+          setCards(cards);
+        })
+        .catch(err => {
+          console.log(err)
+        });
     }
   }, [loggedIn]);
+
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     getUserInfo();
+  //   }
+  // }, [loggedIn]);
 
   useEffect(() => {
     tokenCheck();
@@ -169,8 +153,9 @@ function App() {
   function handleLogin(email, password) {
     return authorize(email, password)
       .then((res) => {
-        if (res.jwt) {
-          localStorage.setItem("jwt", res.jwt);
+        console.log(res);
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
           tokenCheck();
         }
       })
@@ -179,11 +164,19 @@ function App() {
       });
   }
 
+  function handleLogout() {
+    localStorage.removeItem("jwt");
+    setUserData({ _id: "", email: "" });
+    setLoggedIn(false);
+    history.push("/sign-in");
+  }
+
   function tokenCheck() {
-    let jwt = localStorage.getItem('jwt');
-  if (jwt){
+  if (localStorage.getItem("jwt")) {
+    const jwt = localStorage.getItem("jwt");
     auth.getContent(jwt).then((res) => {
         const { _id, email } = res.data;
+        console.log("res.data", res.data);
         setUserData({ _id, email });
         setLoggedIn(true);
       })
@@ -192,13 +185,14 @@ function App() {
       });
     }
   }
- 
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
-        <Header userEmail={userData.email} signOut={signOut} />
+      <div className="root">
+        <Header userEmail={userData.email} handleLogout={handleLogout} />
         <Switch>
-          <ProtectedRoute exact path="/" component={Main} loggedIn={loggedIn} cards={cards} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
+          <ProtectedRoute exact path="/" loggedIn={loggedIn} component={Main} cards={cards} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
+          
           <Route path="/sign-up">
             <Register onRegister={handleRegister} />
           </Route>
@@ -207,12 +201,12 @@ function App() {
           </Route>
           <Route path="/">{loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}</Route>
         </Switch>
-        <Footer />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdatePlace={handleAddPlaceSubmit} />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <InfoTooltip isSignup={isSignup} isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} />
+        <Footer />
       </div>
     </CurrentUserContext.Provider>
   );

@@ -1,11 +1,10 @@
-import { Route, Switch, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
-function Register({ onLogin }) {
+function Register({ onRegister }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const formRef = useRef();
-    // const submitButton = useCheckButton(formRef.current, isValid);
+    const history = useHistory();
 
     function handleEmail(event) {
         setEmail(event.target.value);
@@ -17,7 +16,7 @@ function Register({ onLogin }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        onLogin(password, email);
+        onRegister(email, password).then(() => history.push("/sign-in"));
     }
 
     return (
@@ -51,13 +50,9 @@ function Register({ onLogin }) {
                     <span className="auth__error" id="email-error"></span>
                 </label>
                 <button className="auth__submit-button" type="submit">Зарегистрироваться</button>
-                <Switch>
-                    <Route>
-                        <Link to="/sign-in" className="auth__signin-link">
-                            <p className="auth__signin">Уже зарегистрированы? Войти</p>
-                        </Link>
-                    </Route>
-                </Switch>
+                <Link to="/sign-in" className="auth__link">
+                    <p>Уже зарегистрированы? Войти</p>
+                </Link>
             </form>
         </section>
     )

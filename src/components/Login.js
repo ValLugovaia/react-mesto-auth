@@ -3,8 +3,6 @@ import { useState } from 'react';
 function Login({ onLogin }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const formRef = useRef();
-    // const submitButton = useCheckButton(formRef.current, isValid);
 
     function handleEmail(event) {
         setEmail(event.target.value);
