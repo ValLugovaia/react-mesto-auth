@@ -43,12 +43,6 @@ function App() {
     }
   }, [loggedIn]);
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     getUserInfo();
-  //   }
-  // }, [loggedIn]);
-
   useEffect(() => {
     tokenCheck();
   }, []);
@@ -133,7 +127,7 @@ function App() {
     setSelectedCard(null);
   }
 
-  function handleRegister(email, password) {
+  function onRegister(email, password) {
     return register(email, password)
       .then((res) => {
         if (res.data._id) {
@@ -150,7 +144,7 @@ function App() {
       });
   }
 
-  function handleLogin(email, password) {
+  function onLogin(email, password) {
     return authorize(email, password)
       .then((res) => {
         console.log(res);
@@ -164,7 +158,7 @@ function App() {
       });
   }
 
-  function handleLogout() {
+  function onSignOut() {
     localStorage.removeItem("jwt");
     setUserData({ _id: "", email: "" });
     setLoggedIn(false);
@@ -189,15 +183,14 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="root">
-        <Header userEmail={userData.email} handleLogout={handleLogout} />
+        <Header userEmail={userData.email} onSignOut={onSignOut} />
         <Switch>
           <ProtectedRoute exact path="/" loggedIn={loggedIn} component={Main} cards={cards} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
-          
           <Route path="/sign-up">
-            <Register onRegister={handleRegister} />
+            <Register onRegister={onRegister} />
           </Route>
           <Route path="/sign-in">
-            <Login onLogin={handleLogin} />
+            <Login onLogin={onLogin} />
           </Route>
           <Route path="/">{loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}</Route>
         </Switch>
