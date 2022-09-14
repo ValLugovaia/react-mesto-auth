@@ -134,13 +134,12 @@ function App() {
           setIsSignup(true);
           setIsInfoTooltipPopup(true);
           history.push("/sign-in");
-        } else {
-          setIsSignup(false);
-          setIsInfoTooltipPopup(true);
         }
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        setIsSignup(false);
+        setIsInfoTooltipPopup(true);
       });
   }
 
@@ -150,11 +149,13 @@ function App() {
         console.log(res);
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          tokenCheck();
+          setUserData({ email });
+          setLoggedIn(true);
         }
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        setIsInfoTooltipPopup(true);
       });
   }
 
